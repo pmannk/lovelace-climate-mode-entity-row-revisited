@@ -4,7 +4,7 @@
 
 Show multiple climate preset and hvac mode on entity rows in Home Assistant's Lovelace UI.
 
-This is an updated version of the original [climate-mode-entity-row](https://github.com/piitaya/lovelace-climate-mode-entity-row) Lovelace card
+This is an updated version of the original [climate-mode-entity-row](https://github.com/piitaya/lovelace-climate-mode-entity-row) Lovelace card. It adds a confirmation option when selecting modes.
 
 ## Setup
 
