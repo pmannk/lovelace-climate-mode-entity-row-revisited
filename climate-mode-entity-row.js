@@ -92,9 +92,21 @@
           mode.temperature === this.state.temperature);
 
       const onClick = () => {
+      const confirmation = this._config.confirmation;    
+      // Execute immediately if confirmation is not set
+      if (!confirmation) {
+        this.setMode(mode);
+        return;
+      }
+      // Confirmation message handler
+      const message = (typeof confirmation === 'object' && confirmation.text) 
+        ? confirmation.text 
+        : `Change climate to ${mode}?`;
+      if (confirm(message)) {
         this.setMode(mode);
       }
-
+    }
+      
       const defaultColor = defaultColors[mode.preset_mode || mode.hvac_mode];
       const defaultIcon = defaultIcons[mode.preset_mode || mode.hvac_mode];
       const color = mode.color || defaultColor;
