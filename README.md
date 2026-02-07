@@ -1,17 +1,19 @@
-# climate-mode-entity-row
+# climate-mode-entity-row-revisited
 
 ![Simple example](images/overview.png)
 
-Show multiple climate preset and hvac mode on entity rows in Home Assistant's Lovelace UI
+Show multiple climate preset and hvac mode on entity rows in Home Assistant's Lovelace UI.
+
+This is an updated version of the original [climate-mode-entity-row](https://github.com/piitaya/lovelace-climate-mode-entity-row) Lovelace card
 
 ## Setup
 
-Manually add [climate-mode-entity-row.js](https://raw.githubusercontent.com/piitaya/lovelace-climate-mode-entity-row/master/climate-mode-entity-row.js)
+Manually add [climate-mode-entity-row-revisited.js](https://raw.githubusercontent.com/pmannk/lovelace-climate-mode-entity-row-revisited/refs/heads/master/climate-mode-entity-row-revisited.js)
 to your `<config>/www/` folder and add the following to your `ui-lovelace.yaml` file:
 
 ```yaml
 resources:
-  - url: /local/climate-mode-entity-row.js
+  - url: /local/climate-mode-entity-row-revisited.js
     type: module
 ```
 
@@ -19,20 +21,41 @@ OR install using [HACS](https://hacs.xyz/) and add this instead:
 
 ```yaml
 resources:
-  - url: /community_plugin/lovelace-climate-mode-entity-row/climate-mode-entity-row.js
+  - url: /hacsfiles/lovelace-climate-mode-entity-row-revisited/climate-mode-entity-row-revisited.js
     type: module
 ```
 
 ## Options
 
-| Name   | Type   | Required | Description                      |
-| :----- | :----- | :------- | :------------------------------- |
-| type   | string | Yes      | `custom:climate-mode-entity-row` |
-| entity | string | Yes      | `domain.my_entity_id`            |
-| name   | string | No       | Override entity `friendly_name`  |
-| icon   | string | No       | Override entity `icon`           |
-|        |        |          |
-| modes  | object | Yes      | Modes (see below)                |
+| Name         | Type   | Required | Description                                            |
+| :-----       | :----- | :------- | :----------------------------------------------------  |
+| type         | string | Yes      | `custom:climate-mode-entity-row-revisited`             |
+| entity       | string | Yes      | `domain.my_entity_id`                                  |
+| name         | string | No       | Override entity `friendly_name`                        |
+| icon         | string | No       | Override entity `icon`                                 |
+| confirmation | bool   | No       | Prompt for confirmation when chaning modes (see below) |
+| modes        | object | Yes      | Modes (see below)                                      |
+
+### Confirmation
+Confirmation can be a simple bool (default false), or include a customised prompt by specifying a text value.
+For example:
+```yaml
+type: entities
+entities:
+  - entity: climate.thermostat_kitchen
+    type: "custom:climate-mode-entity-row-revisited"
+    confirmation: true
+```
+Example with custom prompt:
+```yaml
+type: entities
+entities:
+  - entity: climate.thermostat_kitchen
+    type: "custom:climate-mode-entity-row-revisited"
+    confirmation:
+      text: "Are you sure you want to change modes?"
+```
+
 
 ### Mode objects
 
@@ -56,7 +79,7 @@ resources:
 type: entities
 entities:
   - entity: climate.thermostat_kitchen
-    type: "custom:climate-mode-entity-row"
+    type: "custom:climate-mode-entity-row-revisited"
     modes:
       - hvac_mode: "off"
       - preset_mode: "eco"
@@ -71,7 +94,7 @@ entities:
 type: entities
 entities:
   - entity: climate.thermostat_kitchen
-    type: 'custom:climate-mode-entity-row'
+    type: 'custom:climate-mode-entity-row-revisited'
     name: My Thermostat
     icon: 'mdi:home'
     modes:
@@ -96,7 +119,7 @@ If your thermostat entity does not support presets, you can directly define targ
 type: entities
 entities:
   - entity: climate.heatpump
-    type: custom:climate-mode-entity-row
+    type: custom:climate-mode-entity-row-revisited
     modes:
       - hvac_mode: "off"
         icon: "mdi:power"
@@ -121,7 +144,7 @@ You can combine or mix hvac_mode, preset_mode, fan_mode, swing_mode and temperat
 type: entities
 entities:
   - entity: climate.thermostat_kitchen
-    type: "custom:climate-mode-entity-row"
+    type: "custom:climate-mode-entity-row-revisited"
     name: My Thermostat
     icon: "mdi:home"
     modes:
