@@ -92,12 +92,13 @@
           mode.temperature === this.state.temperature);
 
       const onClick = () => {
-        const confirmation = this._config.confirmation;      
+        const confirmation = this._config.confirmation;
+        const modeValue = mode.hvac_mode || mode.preset_mode || mode.fan_mode || mode.swing_mode || "selected mode";
         if (confirmation) {
           // Handles both 'confirmation: true' and 'confirmation: { text: }'
           const message = (typeof confirmation === 'object' && confirmation.text) 
             ? confirmation.text 
-            : `Are you sure you want to set ${this._config.entity} to ${mode}?`;
+            : `Are you sure you want to set ${this._config.entity} to ${modeValue}?`;
           if (!confirm(message)) {
             return;
           }
