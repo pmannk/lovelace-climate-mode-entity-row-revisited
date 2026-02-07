@@ -194,7 +194,7 @@
     }
   }
 
-  customElements.define("climate-mode-entity-row", ClimateModeEntity);
+  customElements.define("climate-mode-entity-row-revisited", ClimateModeEntity);
 })(
   window.LitElement ||
     Object.getPrototypeOf(
