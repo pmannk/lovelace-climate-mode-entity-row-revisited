@@ -92,20 +92,19 @@
           mode.temperature === this.state.temperature);
 
       const onClick = () => {
-      const confirmation = this._config.confirmation;    
-      // Execute immediately if confirmation is not set
-      if (!confirmation) {
+        const confirmation = this._config.confirmation;      
+        if (confirmation) {
+          // Handles both 'confirmation: true' and 'confirmation: { text: }'
+          const message = (typeof confirmation === 'object' && confirmation.text) 
+            ? confirmation.text 
+            : `Are you sure you want to set ${this._config.entity} to ${mode}?`;
+          if (!confirm(message)) {
+            return;
+          }
+        }
+        
         this.setMode(mode);
-        return;
-      }
-      // Confirmation message handler
-      const message = (typeof confirmation === 'object' && confirmation.text) 
-        ? confirmation.text 
-        : `Change climate to ${mode}?`;
-      if (confirm(message)) {
-        this.setMode(mode);
-      }
-    }
+      };
       
       const defaultColor = defaultColors[mode.preset_mode || mode.hvac_mode];
       const defaultIcon = defaultIcons[mode.preset_mode || mode.hvac_mode];
